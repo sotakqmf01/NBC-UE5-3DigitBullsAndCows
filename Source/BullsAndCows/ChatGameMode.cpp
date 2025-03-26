@@ -36,9 +36,6 @@ void AChatGameMode::PostLogin(APlayerController* NewPlayer)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Player State is nullptr"));
 	}
-
-	//FTimerHandle DelayHandle;
-	//GetWorldTimerManager().SetTimer(DelayHandle, FTimerDelegate::CreateUObject(this, &AChatGameMode::InitPlayerStateAfterDelay, NewPlayer), 0.5f, false);
 }
 
 void AChatGameMode::StartGame()
@@ -281,20 +278,3 @@ void AChatGameMode::BroadcastChatToClients(const FString& Message, const FName& 
 		}
 	}
 }
-
-
-//void AChatGameMode::InitPlayerStateAfterDelay(APlayerController* NewPlayer)
-//{
-//	AChatPlayerState* ChatPlayerState = NewPlayer->GetPlayerState<AChatPlayerState>();
-//	if (ChatPlayerState)
-//	{
-//		FString NewPlayerName = FString::Printf(TEXT("Player%d"), ConnectedPlayerCount);
-//		ChatPlayerState->PlayerName = FName(*NewPlayerName);
-//
-//		UE_LOG(LogTemp, Warning, TEXT("Connected Player : %s"), *NewPlayerName);
-//	}
-//	else
-//	{
-//		UE_LOG(LogTemp, Error, TEXT("Connected Player : None"));
-//	}
-//}

@@ -26,7 +26,7 @@ void UBnCBPFuncLibrary::EvaluateBullsAndCows(const FString& guess, const FString
 	// 응답 패턴일 때만 들어오니, '/'를 빼고 비교해야함
 	if (!IsValidInput(guess, answer))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Blue, FString::Printf(TEXT("Wrong Input")));
+		UE_LOG(LogTemp, Warning, TEXT("Wrong Input"));
 		OutOUT = true;
 		return;
 	}
@@ -57,19 +57,20 @@ bool UBnCBPFuncLibrary::IsValidInput(const FString& guess, const FString& answer
 	FString GuessNum = guess.Mid(1);
 	int32 ParsedNum;
 
-	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Blue, FString::Printf(TEXT("Guess Num = %s"), *GuessNum));
+	UE_LOG(LogTemp, Warning, TEXT("Guess Num = %s"), *GuessNum);
 
 	// 정답 길이보다 길면 false
 	if (GuessNum.Len() != answer.Len())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Blue, FString::Printf(TEXT("The length of the input number and the correct number are not the same")));
+		UE_LOG(LogTemp, Warning, TEXT("The length of the input number and the correct number are not the same"));
 		return false;
 	}
 
 	// 숫자로 변환 못하면 false
 	if (!FDefaultValueHelper::ParseInt(GuessNum, ParsedNum))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Blue, FString::Printf(TEXT("Can't Convert to Int")));
+		UE_LOG(LogTemp, Warning, TEXT("Can't Convert to Int"));
+
 		return false;
 	}
 
@@ -79,7 +80,7 @@ bool UBnCBPFuncLibrary::IsValidInput(const FString& guess, const FString& answer
 	{
 		if (GuessNumDigits.Contains(Char))
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Blue, FString::Printf(TEXT("Duplicated Input")));
+			UE_LOG(LogTemp, Warning, TEXT("Duplicated Input"));
 			return false;
 		}
 

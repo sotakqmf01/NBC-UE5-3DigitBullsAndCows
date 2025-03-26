@@ -12,8 +12,6 @@ AChatGameState::AChatGameState() :
 	CurrentTurnPlayerIndex(-1),
 	TimeLimit(30.0f)
 {
-	// 기본
-	//bReplicates = true;
 }
 
 void AChatGameState::GameStateClear()
@@ -167,23 +165,3 @@ void AChatGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 
 	DOREPLIFETIME(AChatGameState, CurrentTurnPlayerIndex);
 }
-
-// 제한 시간 UI 갱신할 때 모든 클라이언트에 대해 ClientRPC 호출하는 방법
-//void AChatGameState::UpdateTimerUI()
-//{
-//	float RemainingTime = GetWorldTimerManager().GetTimerRemaining(TurnTimerHandle);
-//	if (RemainingTime <= 0.0f)
-//	{
-//		RemainingTime = 0.0f;
-//	}
-//
-//	// 모든 플레이어 컨트롤러에 대해 Multicast 호출
-//	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
-//	{
-//		AChatPlayerController* ChatPlayerController = Cast<AChatPlayerController>(It->Get());
-//		if (ChatPlayerController)
-//		{
-//			ChatPlayerController->Client_UpdateTimerUI(RemainingTime);
-//		}
-//	}
-//}

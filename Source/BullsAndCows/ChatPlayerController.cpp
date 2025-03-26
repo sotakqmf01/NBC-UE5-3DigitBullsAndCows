@@ -14,17 +14,12 @@ AChatPlayerController::AChatPlayerController() :
 	ChatInputBox(nullptr),
 	ChatLog(nullptr)
 {
-	// PlayerController도 이거 해야하나? 하는거 아님
-	//bReplicates = true;
 }
 
 void AChatPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// 타이머로 하는건 먼가 먼가임;;
-	//FTimerHandle TimerHandle;
-	//GetWorldTimerManager().SetTimer(TimerHandle, this, &AChatPlayerController::SetupHUD, 0.3f, false);
 	SetupHUD();
 	PlayerLogin();
 }
@@ -246,19 +241,3 @@ void AChatPlayerController::Client_UpdateTurnPlayerUI_Implementation(const FName
 		TurnPlayerText->SetText(FText::FromString(FString::Printf(TEXT("Turn : %s"), *CurrentTurnPlayerName.ToString())));
 	}
 }
-
-// 제한 시간 UI 갱신할 때 사용되는 ClientRPC()
-//void AChatPlayerController::Client_UpdateTimerUI_Implementation(float RemainingTime)
-//{
-//	if (!ChatUIInstance)
-//	{
-//		UE_LOG(LogTemp, Warning, TEXT("TimerUI : No ChatUIInstance"));
-//		return;
-//	}
-//
-//	UTextBlock* TimeLimitText = Cast<UTextBlock>(ChatUIInstance->GetWidgetFromName("TimeLimitText"));
-//	if (TimeLimitText)
-//	{
-//		TimeLimitText->SetText(FText::FromString(FString::Printf(TEXT("Time Limit : %d"), FMath::CeilToInt(RemainingTime))));
-//	}
-//}

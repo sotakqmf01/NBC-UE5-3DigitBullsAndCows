@@ -53,6 +53,3 @@ protected:
 private:	
 	FName PlayerName;
 };
-
-//UFUNCTION(Client, Reliable)
-//void Client_UpdateTimerUI(float RemainingTime);	// 제한 시간을 보여주는 UI 업데이트(전부)

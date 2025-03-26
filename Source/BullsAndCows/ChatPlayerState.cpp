@@ -5,8 +5,6 @@ AChatPlayerState::AChatPlayerState() :
 	PlayerName(""),
 	AttemptCount(0)
 {
-	// ±âº»
-	//bReplicates = true;
 }
 
 void AChatPlayerState::DecreaseAttemptCount()

@@ -35,8 +35,3 @@ private:
 	int32 ConnectedPlayerCount;
 	bool bIsOnGame;
 };
-
-// PlayerController가 생성될 때, PlayerState도 생성되지만
-// 실수나 특정 상황에 PlayerState가 없을 수 있음
-// 그 때를 대비한 타이머의 델리게이트 함수
-//void InitPlayerStateAfterDelay(APlayerController* NewPlayer);
