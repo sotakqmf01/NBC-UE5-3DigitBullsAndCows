@@ -1,5 +1,6 @@
 # NBC-UE5-3DigitBullsAndCows
 
+### 구현 과정
 Blueprint Function Library 만들고, 숫자 생성, 정답 비교 같은 함수를 구현
 
 PlayerController랑 GameMode 만들어서 RPC를 통해 둘 사이에 채팅 메시지를 주고 받을 수 있도록 구현
