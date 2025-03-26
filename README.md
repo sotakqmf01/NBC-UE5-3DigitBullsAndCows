@@ -1,5 +1,5 @@
 # NBC-UE5-3DigitBullsAndCows
-### 소개
+### 🎮 소개
 랜덤한 3자리 숫자를 맞추는 숫자 야구 게임
 
 ![스크린샷 2025-03-26 173459](https://github.com/user-attachments/assets/50d6487d-84bf-4998-9297-762b9c9242b4)
@@ -20,7 +20,7 @@ Bulls : 같은 자리 + 같은 수 의 개수
 Cows : 다른 자리 + 같은 수 의 개수
 OUT : 잘못된 입력
 
-### 구현 과정
+### 📝 구현 과정
 Blueprint Function Library 만들고, 숫자 생성, 정답 비교 같은 함수를 구현
 
 리슨 서버를 기반으로 하고
