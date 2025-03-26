@@ -69,6 +69,8 @@ void AChatGameState::TimeOutPassTurn()
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Decrease AttemptCount In GameState"));
 			ChatGameMode->DecreaseAttemptCount(ChatPlayerController);
+
+			ChatGameMode->BroadcastChatToClients("Time Out!!", CurrentPlayerState->PlayerName);
 		
 			if (ChatGameMode->IsGameOver(""))
 			{
