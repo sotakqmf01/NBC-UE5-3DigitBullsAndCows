@@ -21,6 +21,11 @@ public:
 	void PassTurn();
 	void EndTurn();
 
+	// 피드백
+	// - StartTurn 함수에서 타이머 정리하는 로직이 보이질 않는데 추가만 해주시면 좋을 것 같습니다!
+	// ▶ 매번 /start로 시작할 때 타이머 정리 한번 해주는게 좋아보이긴 함
+	void ClearTurnTimers();
+
 	void UpdateTurnPlayerUI();	// ClientRPC로 Turn UI 업데이트
 	void UpdateTimerUI();	// MulticastRPC로 Timer UI 업데이트
 

@@ -33,6 +33,9 @@ void AChatGameState::DecideFirstTurn()
 
 void AChatGameState::StartTurn()
 {
+	// 피드백
+	ClearTurnTimers();
+
 	GetWorldTimerManager().SetTimer(TurnTimerHandle, this, &AChatGameState::TimeOutPassTurn, TimeLimit, false);
 
 	GetWorldTimerManager().SetTimer(UIUpdateTimerHandle, this, &AChatGameState::UpdateTimerUI, 0.1f, true);
@@ -103,6 +106,20 @@ void AChatGameState::EndTurn()
 	GameStateClear();
 
 	UpdateTurnPlayerUI();
+}
+
+// 피드백
+void AChatGameState::ClearTurnTimers()
+{
+	FTimerManager& TimerManager = GetWorldTimerManager();
+	if (TimerManager.IsTimerActive(TurnTimerHandle))
+	{
+		TimerManager.ClearTimer(TurnTimerHandle);
+	}
+	if (TimerManager.IsTimerActive(UIUpdateTimerHandle))
+	{
+		TimerManager.ClearTimer(UIUpdateTimerHandle);
+	}
 }
 
 void AChatGameState::UpdateTurnPlayerUI()
