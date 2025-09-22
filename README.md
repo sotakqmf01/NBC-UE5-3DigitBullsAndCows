@@ -22,6 +22,33 @@ OUT : 잘못된 입력</br>
 
 </br></br>
 
+### 🚀 시작하기
+
+> 리포지토리 클론 후 직접 프로젝트 빌드
+
+1.  **저장소 클론**
+    ```bash
+    git clone https://https://github.com/sotakqmf01/NBC-UE5-3DigitBullsAndCows.git
+    ```
+
+2.  **필수 프로그램 설치**
+    - **Unreal Engine 5.5**: Epic Games Launcher를 통해 설치합니다.
+    - **Visual Studio 2022**: 'C++를 사용한 게임 개발' 워크로드를 반드시 포함하여 설치합니다.
+
+3.  **프로젝트 파일 생성**
+    - 프로젝트 루트 디렉토리에서 `BullsAndCows.uproject` 파일을 우클릭합니다.
+    - `Generate Visual Studio project files` 메뉴를 선택하여 Visual Studio 솔루션(`.sln`) 파일을 생성합니다.
+
+4.  **빌드**
+    - 생성된 `BullsAndCows.sln` 파일을 Visual Studio 2022에서 엽니다.
+    - `Development Editor` 빌드 구성으로 `BullsAndCows` 프로젝트를 빌드합니다.
+
+5.  **프로젝트 실행**
+    - 빌드가 성공하면, Visual Studio에서 `F5` 키를 눌러 디버깅을 시작하거나 언리얼 에디터에서 직접 프로젝트를 열 수 있습니다.
+    - 에디터가 열리면 `Content/Maps/LoadInLevel`을 열어 시작할 수 있습니다.
+
+</br></br>
+
 ### 📝 구현 과정
 Blueprint Function Library 만들고, 숫자 생성, 정답 비교 같은 함수를 구현
 
