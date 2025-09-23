@@ -8,7 +8,7 @@ FString UBnCBPFuncLibrary::GenerateRandomNumber()
 
 	for (int32 i = 0; i < 3; i++)
 	{
-		int32 idx = FMath::RandRange(0, arr.Num()-1);
+		int32 idx = FMath::RandRange(0, arr.Num() - 1);
 		num = num * 10 + arr[idx];
 
 		arr.RemoveAt(idx);
@@ -23,7 +23,7 @@ void UBnCBPFuncLibrary::EvaluateBullsAndCows(const FString& guess, const FString
 	OutCows = 0;
 	OutOUT = false;
 
-	// ÀÀ´ä ÆÐÅÏÀÏ ¶§¸¸ µé¾î¿À´Ï, '/'¸¦ »©°í ºñ±³ÇØ¾ßÇÔ
+	// ì‘ë‹µ íŒ¨í„´ì¼ ë•Œë§Œ ë“¤ì–´ì˜¤ë‹ˆ, '/'ë¥¼ ë¹¼ê³  ë¹„êµí•´ì•¼í•¨
 	if (!IsValidInput(guess, answer))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Wrong Input"));
@@ -37,7 +37,7 @@ void UBnCBPFuncLibrary::EvaluateBullsAndCows(const FString& guess, const FString
 		{
 			if (guess[i + 1] == answer[j])
 			{
-				if (i == j) 
+				if (i == j)
 				{
 					OutBulls++;
 				}
@@ -52,21 +52,21 @@ void UBnCBPFuncLibrary::EvaluateBullsAndCows(const FString& guess, const FString
 
 bool UBnCBPFuncLibrary::IsValidInput(const FString& guess, const FString& answer)
 {
-	// ÀÀ´ä ÆÐÅÏ '/' Á¦°Å
-	// Mid(n) : n¹øÂ° ÀÎµ¦½ººÎÅÍ ³¡±îÁö ÀÚ¸¥ Substring
+	// ì‘ë‹µ íŒ¨í„´ '/' ì œê±°
+	// Mid(n) : në²ˆì§¸ ì¸ë±ìŠ¤ë¶€í„° ëê¹Œì§€ ìžë¥¸ Substring
 	FString GuessNum = guess.Mid(1);
 	int32 ParsedNum;
 
 	UE_LOG(LogTemp, Warning, TEXT("Guess Num = %s"), *GuessNum);
 
-	// Á¤´ä ±æÀÌº¸´Ù ±æ¸é false
+	// ì •ë‹µ ê¸¸ì´ë³´ë‹¤ ê¸¸ë©´ false
 	if (GuessNum.Len() != answer.Len())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("The length of the input number and the correct number are not the same"));
 		return false;
 	}
 
-	// ¼ýÀÚ·Î º¯È¯ ¸øÇÏ¸é false
+	// ìˆ«ìžë¡œ ë³€í™˜ ëª»í•˜ë©´ false
 	if (!FDefaultValueHelper::ParseInt(GuessNum, ParsedNum))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Can't Convert to Int"));
@@ -74,7 +74,7 @@ bool UBnCBPFuncLibrary::IsValidInput(const FString& guess, const FString& answer
 		return false;
 	}
 
-	// Áßº¹ ÀÖÀ¸¸é false
+	// ì¤‘ë³µ ìžˆìœ¼ë©´ false
 	TSet<TCHAR> GuessNumDigits;
 	for (TCHAR Char : GuessNum)
 	{

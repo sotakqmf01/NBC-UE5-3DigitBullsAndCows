@@ -31,7 +31,7 @@ void AChatGameState::DecideFirstTurn()
 
 void AChatGameState::StartTurn()
 {
-	// ÇÇµå¹é
+	// í”¼ë“œë°±
 	ClearTurnTimers();
 
 	GetWorldTimerManager().SetTimer(TurnTimerHandle, this, &AChatGameState::TimeOutPassTurn, TimeLimit, false);
@@ -60,8 +60,8 @@ void AChatGameState::TimeOutPassTurn()
 	{
 		return;
 	}
-	
-	// Á¦ÇÑ ½Ã°£ ´ÙµÇ¸é ±âÈ¸ ¼Ò¸ğ
+
+	// ì œí•œ ì‹œê°„ ë‹¤ë˜ë©´ ê¸°íšŒ ì†Œëª¨
 	AChatPlayerController* ChatPlayerController = Cast<AChatPlayerController>(PlayerController);
 	if (ChatPlayerController)
 	{
@@ -72,7 +72,7 @@ void AChatGameState::TimeOutPassTurn()
 			ChatGameMode->DecreaseAttemptCount(ChatPlayerController);
 
 			ChatGameMode->BroadcastChatToClients("Time Out!!", CurrentPlayerState->PlayerName);
-		
+
 			if (ChatGameMode->IsGameOver(""))
 			{
 				ChatGameMode->EndGame();
@@ -106,7 +106,7 @@ void AChatGameState::EndTurn()
 	UpdateTurnPlayerUI();
 }
 
-// ÇÇµå¹é
+// í”¼ë“œë°±
 void AChatGameState::ClearTurnTimers()
 {
 	FTimerManager& TimerManager = GetWorldTimerManager();
@@ -122,7 +122,7 @@ void AChatGameState::ClearTurnTimers()
 
 void AChatGameState::UpdateTurnPlayerUI()
 {
-	// ÀÎµ¦½º À¯È¿ ¹üÀ§ ÇĞÀÎ
+	// ì¸ë±ìŠ¤ ìœ íš¨ ë²”ìœ„ í•™ì¸
 	if (CurrentTurnPlayerIndex >= PlayerArray.Num() || CurrentTurnPlayerIndex < -1)
 	{
 		return;
@@ -130,7 +130,7 @@ void AChatGameState::UpdateTurnPlayerUI()
 
 	FName CurrentTurnPlayerName;
 
-	// ÀÎµ¦½º °ª¿¡ µû¶ó ÀÌ¸§ ¼³Á¤
+	// ì¸ë±ìŠ¤ ê°’ì— ë”°ë¼ ì´ë¦„ ì„¤ì •
 	if (CurrentTurnPlayerIndex == -1)
 	{
 		CurrentTurnPlayerName = "";

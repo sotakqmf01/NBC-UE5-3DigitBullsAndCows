@@ -8,14 +8,14 @@ UCLASS()
 class BULLSANDCOWS_API UBnCBPFuncLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
-	
+
 public:
-	// ·£´ıÇÑ ¼ıÀÚ »ı¼º(¹®ÀÚ¿­·Î ¹İÈ¯)
+	// ëœë¤í•œ ìˆ«ì ìƒì„±(ë¬¸ìì—´ë¡œ ë°˜í™˜)
 	UFUNCTION(BlueprintCallable, Category = "BullsAndCows")
 	static FString GenerateRandomNumber();
-	// Å¬¶óÀÌ¾ğÆ® ¿¹Ãø°ú Á¤´ä ºñ±³
+	// í´ë¼ì´ì–¸íŠ¸ ì˜ˆì¸¡ê³¼ ì •ë‹µ ë¹„êµ
 	UFUNCTION(BlueprintCallable, Category = "BullsAndCows")
 	static void EvaluateBullsAndCows(const FString& guess, const FString& answer, UPARAM(ref)int32& OutBulls, UPARAM(ref)int32& OutCows, UPARAM(ref)bool& OutOUT);
-	// Å¬¶óÀÌ¾ğÆ® ¿¹Ãø ¹®ÀÚ¿­ÀÌ À¯È¿ÇÑ ÀÔ·ÂÀÎÁö È®ÀÎ
+	// í´ë¼ì´ì–¸íŠ¸ ì˜ˆì¸¡ ë¬¸ìì—´ì´ ìœ íš¨í•œ ì…ë ¥ì¸ì§€ í™•ì¸
 	static bool IsValidInput(const FString& guess, const FString& answer);
 };

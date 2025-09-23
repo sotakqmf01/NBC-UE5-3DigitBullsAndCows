@@ -16,31 +16,31 @@ public:
 	AChatPlayerController();
 
 	UFUNCTION(Server, Reliable, WithValidation)
-	void Server_SendChatToServer(const FString& Message, const FName& SenderName);	// PlayerController¿¡¼­ GameMode(¼­¹ö)·Î
+	void Server_SendChatToServer(const FString& Message, const FName& SenderName);	// PlayerControllerì—ì„œ GameMode(ì„œë²„)ë¡œ
 	UFUNCTION(Client, Reliable)
-	void Client_ReceiveChatFromServer(const FString& Message, const FName& SenderName);	// GameMode(¼­¹ö)¿¡¼­ PlayerController·Î
+	void Client_ReceiveChatFromServer(const FString& Message, const FName& SenderName);	// GameMode(ì„œë²„)ì—ì„œ PlayerControllerë¡œ
 	UFUNCTION(Client, Reliable)
-	void Client_UpdateAttemptCountUI(int32 AttemptCount);	// ½Ãµµ È½¼ö ¹Ù²ğ ¶§ ¸¶´Ù UI ¾÷µ¥ÀÌÆ®(°³ÀÎ)
+	void Client_UpdateAttemptCountUI(int32 AttemptCount);	// ì‹œë„ íšŸìˆ˜ ë°”ë€” ë•Œ ë§ˆë‹¤ UI ì—…ë°ì´íŠ¸(ê°œì¸)
 	UFUNCTION(Client, Reliable)
-	void Client_UpdateTurnPlayerUI(const FName& CurrentTurnPlayerName);	// ÇöÀç ÅÏÀÎ ÇÃ·¹ÀÌ¾î º¸¿©ÁÖ´Â UI ¾÷µ¥ÀÌÆ®(ÀüºÎ)
+	void Client_UpdateTurnPlayerUI(const FName& CurrentTurnPlayerName);	// í˜„ì¬ í„´ì¸ í”Œë ˆì´ì–´ ë³´ì—¬ì£¼ëŠ” UI ì—…ë°ì´íŠ¸(ì „ë¶€)
 
 	UFUNCTION(BlueprintCallable)
-	void SendChat(const FString& Message);	// UI¿¡ ÀÔ·ÂÇÑ ¸Ş½ÃÁö¸¦ PlayerController·Î
+	void SendChat(const FString& Message);	// UIì— ì…ë ¥í•œ ë©”ì‹œì§€ë¥¼ PlayerControllerë¡œ
 
-	void UpdateTimerUI(float RemainingTime);	// Á¦ÇÑ ½Ã°£À» º¸¿©ÁÖ´Â UI ¾÷µ¥ÀÌÆ®(ÀüºÎ)
+	void UpdateTimerUI(float RemainingTime);	// ì œí•œ ì‹œê°„ì„ ë³´ì—¬ì£¼ëŠ” UI ì—…ë°ì´íŠ¸(ì „ë¶€)
 
 protected:
 	virtual void BeginPlay() override;
 
-	// PlayerState°¡ ³×Æ®¿öÅ©¸¦ ÅëÇØ Å¬¶óÀÌ¾ğÆ®·Î º¹Á¦(replication)µÇ¾úÀ» ¶§ ÀÚµ¿À¸·Î È£ÃâµÇ´Â ÇÔ¼ö
+	// PlayerStateê°€ ë„¤íŠ¸ì›Œí¬ë¥¼ í†µí•´ í´ë¼ì´ì–¸íŠ¸ë¡œ ë³µì œ(replication)ë˜ì—ˆì„ ë•Œ ìë™ìœ¼ë¡œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
 	virtual void OnRep_PlayerState() override;
 
 private:
 	void SetupHUD();	// UI
-	void PlayerLogin();	// ·Î±×ÀÎ
-	
+	void PlayerLogin();	// ë¡œê·¸ì¸
+
 protected:
-	// UI À§Á¬
+	// UI ìœ„ì ¯
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HUD")
 	TSubclassOf<UUserWidget> ChatUIClass;
 	UPROPERTY(VisibleAnyWhere, BlueprintReadWrite, Category = "HUD")
@@ -50,6 +50,6 @@ protected:
 	UPROPERTY()
 	UScrollBox* ChatLog;
 
-private:	
+private:
 	FName PlayerName;
 };

@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -8,7 +9,7 @@ UCLASS()
 class BULLSANDCOWS_API AChatGameState : public AGameState
 {
 	GENERATED_BODY()
-	
+
 public:
 	AChatGameState();
 
@@ -21,19 +22,19 @@ public:
 	void PassTurn();
 	void EndTurn();
 
-	// ««µÂπÈ
-	// - StartTurn «‘ºˆø°º≠ ≈∏¿Ã∏” ¡§∏Æ«œ¥¬ ∑Œ¡˜¿Ã ∫∏¿Ã¡˙ æ ¥¬µ• √ﬂ∞°∏∏ «ÿ¡÷Ω√∏È ¡¡¿ª ∞Õ ∞∞Ω¿¥œ¥Ÿ!
-	// ¢∫ ∏≈π¯ /start∑Œ Ω√¿€«“ ∂ß ≈∏¿Ã∏” ¡§∏Æ «—π¯ «ÿ¡÷¥¬∞‘ ¡¡æ∆∫∏¿Ã±‰ «‘
+	// ÌîºÎìúÎ∞±
+	// - StartTurn Ìï®ÏàòÏóêÏÑú ÌÉÄÏù¥Î®∏ Ï†ïÎ¶¨ÌïòÎäî Î°úÏßÅÏù¥ Î≥¥Ïù¥Ïßà ÏïäÎäîÎç∞ Ï∂îÍ∞ÄÎßå Ìï¥Ï£ºÏãúÎ©¥ Ï¢ãÏùÑ Í≤É Í∞ôÏäµÎãàÎã§!
+	// ‚ñ∂ Îß§Î≤à /startÎ°ú ÏãúÏûëÌï† Îïå ÌÉÄÏù¥Î®∏ Ï†ïÎ¶¨ ÌïúÎ≤à Ìï¥Ï£ºÎäîÍ≤å Ï¢ãÏïÑÎ≥¥Ïù¥Í∏¥ Ìï®
 	void ClearTurnTimers();
 
-	void UpdateTurnPlayerUI();	// ClientRPC∑Œ Turn UI æ˜µ•¿Ã∆Æ
-	void UpdateTimerUI();	// MulticastRPC∑Œ Timer UI æ˜µ•¿Ã∆Æ
+	void UpdateTurnPlayerUI();	// ClientRPCÎ°ú Turn UI ÏóÖÎç∞Ïù¥Ìä∏
+	void UpdateTimerUI();	// MulticastRPCÎ°ú Timer UI ÏóÖÎç∞Ïù¥Ìä∏
 
 	UFUNCTION(NetMulticast, Reliable)
-	void Multicast_UpdateTimerUI(float RemainingTime);	// MulticastRPC∑Œ Timer UI æ˜µ•¿Ã∆Æ
+	void Multicast_UpdateTimerUI(float RemainingTime);	// MulticastRPCÎ°ú Timer UI ÏóÖÎç∞Ïù¥Ìä∏
 
 public:
-	// «√∑π¿ÃæÓµÈ¿Ã answer∂˚ bulls, cows∏¶ æÀ∏È æ»µ… ∞Õ ∞∞¿Ω => ∏Æ«√∏Æƒ…¿Ãº« X
+	// ÌîåÎ†àÏù¥Ïñ¥Îì§Ïù¥ answerÎûë bulls, cowsÎ•º ÏïåÎ©¥ ÏïàÎê† Í≤É Í∞ôÏùå => Î¶¨ÌîåÎ¶¨ÏºÄÏù¥ÏÖò X
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BullsAndCows")
 	FString Answer;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BullsAndCows")
@@ -43,7 +44,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BullsAndCows")
 	bool Out;
 
-	// ≈œ
+	// ÌÑ¥
 	UPROPERTY(Replicated)
 	int32 CurrentTurnPlayerIndex;
 

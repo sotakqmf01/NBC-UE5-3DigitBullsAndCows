@@ -5,7 +5,7 @@
 #include "ChatGameState.h"
 #include "Kismet/GameplayStatics.h"
 
-AChatGameMode::AChatGameMode():
+AChatGameMode::AChatGameMode() :
 	PlayerAttemptCount(3),
 	ConnectedPlayerCount(0),
 	bIsOnGame(false)
@@ -42,22 +42,22 @@ void AChatGameMode::StartGame()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Start Game"));
 
-	// °ÔÀÓ ½ÃÀÛ ¸Ş½ÃÁö broadcast
+	// ê²Œì„ ì‹œì‘ ë©”ì‹œì§€ broadcast
 	BroadcastChatToClients("------- Start Game -------", "");
 
 	bIsOnGame = true;
 
-	// ¸ğµç ÇÃ·¹ÀÌ¾îµé ±âÈ¸ ÃÊ±âÈ­
+	// ëª¨ë“  í”Œë ˆì´ì–´ë“¤ ê¸°íšŒ ì´ˆê¸°í™”
 	InitPlayerAttemptCount();
 
-	// GameState ÃÊ±âÈ­ ¹× ÅÏ ½ÃÀÛ
+	// GameState ì´ˆê¸°í™” ë° í„´ ì‹œì‘
 	AChatGameState* ChatGameState = GetGameState<AChatGameState>();
 	if (ChatGameState)
 	{
 		ChatGameState->Answer = UBnCBPFuncLibrary::GenerateRandomNumber();
 		UE_LOG(LogTemp, Warning, TEXT("Answer : %s"), *(ChatGameState->Answer));
 
-		ChatGameState->DecideFirstTurn();	// Ã¹ ¼ø¼­ ·£´ı
+		ChatGameState->DecideFirstTurn();	// ì²« ìˆœì„œ ëœë¤
 		ChatGameState->StartTurn();
 	}
 }
@@ -69,7 +69,7 @@ void AChatGameMode::InitPlayerAttemptCount()
 		AChatPlayerController* ChatPlayerController = Cast<AChatPlayerController>(It->Get());
 		if (ChatPlayerController)
 		{
-			AChatPlayerState* ChatPlayerState =	ChatPlayerController->GetPlayerState<AChatPlayerState>();
+			AChatPlayerState* ChatPlayerState = ChatPlayerController->GetPlayerState<AChatPlayerState>();
 			if (ChatPlayerState)
 			{
 				ChatPlayerState->SetAttemptCount(PlayerAttemptCount);
@@ -98,14 +98,14 @@ void AChatGameMode::ReceiveChatFromClient(APlayerController* SenderPlayerControl
 {
 	UE_LOG(LogTemp, Warning, TEXT("Server Receive Chat From Client"));
 
-	// ÀÏ´Ü ¼­¹ö¿¡¼­ ¹ŞÀº Ã¤ÆÃµéÀº ±âº»ÀûÀ¸·Î broadcast ÇÏ±â
-	// => ¼öÁ¤ : ±âº» Ã¤ÆÃµé¸¸ broadcast
+	// ì¼ë‹¨ ì„œë²„ì—ì„œ ë°›ì€ ì±„íŒ…ë“¤ì€ ê¸°ë³¸ì ìœ¼ë¡œ broadcast í•˜ê¸°
+	// => ìˆ˜ì • : ê¸°ë³¸ ì±„íŒ…ë“¤ë§Œ broadcast
 	if (Message[0] != '/')
 	{
 		BroadcastChatToClients(Message, SenderName);
 	}
 
-	// ¹ŞÀº Ã¤ÆÃÀÌ ÀÀ´ä ÆĞÅÏÀ» Æ÷ÇÔÇÏ´ÂÁö È®ÀÎ
+	// ë°›ì€ ì±„íŒ…ì´ ì‘ë‹µ íŒ¨í„´ì„ í¬í•¨í•˜ëŠ”ì§€ í™•ì¸
 	ParseChat(SenderPlayerController, Message, SenderName);
 }
 
@@ -116,11 +116,11 @@ void AChatGameMode::DecreaseAttemptCount(APlayerController* SenderPlayerControll
 		AChatPlayerState* ChatPlayerState = SenderPlayerController->GetPlayerState<AChatPlayerState>();
 		if (ChatPlayerState)
 		{
-			// ±âÈ¸ ¼Ò¸ğ
+			// ê¸°íšŒ ì†Œëª¨
 			ChatPlayerState->DecreaseAttemptCount();
 			UE_LOG(LogTemp, Warning, TEXT("Attempt Count : %d"), ChatPlayerState->AttemptCount);
 
-			// UI ¾÷µ¥ÀÌÆ®
+			// UI ì—…ë°ì´íŠ¸
 			UpdateAttemptCountUI(SenderPlayerController);
 		}
 	}
@@ -136,11 +136,11 @@ void AChatGameMode::UpdateAttemptCountUI(APlayerController* SenderPlayerControll
 			return;
 		}
 
-		// UI ¾÷µ¥ÀÌÆ®
-		// ¼­¹ö´Â ÀÚ±â°¡ °ğ Å¬¶óÀÌ¾ğÆ®ÀÌÀÚ ¼­¹ö´Ï±î ¸®ÇÃ¸®ÄÉÀÌ¼Ç µô·¹ÀÌ°¡ ¾ø´Âµ¥
-		// Å¬¶óÀÌ¾ğÆ®´Â ¸®ÇÃ¸®ÄÉÀÌ¼Ç µô·¹ÀÌ°¡ Á» ÀÖÀ» ¼ö ÀÖÀ½
-		// => ¸®ÇÃ¸®ÄÉÀÌ¼Ç µÇ±â Àü¿¡ UI Update¸¦ ¸ÕÀú ÇÒ ¼öµµ ÀÖÀ½ => UI¿¡ ³²Àº ±âÈ¸°¡ Á¦´ë·Î ¹İ¿µ ¾ÈµÊ
-		// ==> ¼­¹ö¿¡¼­ ¹Ù²Û °ªÀ» Á÷Á¢ ³Ñ°ÜÁÜ
+		// UI ì—…ë°ì´íŠ¸
+		// ì„œë²„ëŠ” ìê¸°ê°€ ê³§ í´ë¼ì´ì–¸íŠ¸ì´ì ì„œë²„ë‹ˆê¹Œ ë¦¬í”Œë¦¬ì¼€ì´ì…˜ ë”œë ˆì´ê°€ ì—†ëŠ”ë°
+		// í´ë¼ì´ì–¸íŠ¸ëŠ” ë¦¬í”Œë¦¬ì¼€ì´ì…˜ ë”œë ˆì´ê°€ ì¢€ ìˆì„ ìˆ˜ ìˆìŒ
+		// => ë¦¬í”Œë¦¬ì¼€ì´ì…˜ ë˜ê¸° ì „ì— UI Updateë¥¼ ë¨¼ì € í•  ìˆ˜ë„ ìˆìŒ => UIì— ë‚¨ì€ ê¸°íšŒê°€ ì œëŒ€ë¡œ ë°˜ì˜ ì•ˆë¨
+		// ==> ì„œë²„ì—ì„œ ë°”ê¾¼ ê°’ì„ ì§ì ‘ ë„˜ê²¨ì¤Œ
 		AChatPlayerState* ChatPlayerState = SenderPlayerController->GetPlayerState<AChatPlayerState>();
 		if (ChatPlayerState)
 		{
@@ -151,7 +151,7 @@ void AChatGameMode::UpdateAttemptCountUI(APlayerController* SenderPlayerControll
 
 void AChatGameMode::ParseChat(APlayerController* SenderPlayerController, const FString& Message, const FName& SenderName)
 {
-	// '/'´Â ÀÀ´ä ÆĞÅÏ
+	// '/'ëŠ” ì‘ë‹µ íŒ¨í„´
 	if (Message[0] == '/')
 	{
 		AChatGameState* ChatGameState = GetGameState<AChatGameState>();
@@ -160,31 +160,31 @@ void AChatGameMode::ParseChat(APlayerController* SenderPlayerController, const F
 			return;
 		}
 
-		// ¼­¹ö¿¡¼­¸¸ "/start"·Î °ÔÀÓ ½ÇÇàÇÒ ¼ö ÀÖµµ·Ï
+		// ì„œë²„ì—ì„œë§Œ "/start"ë¡œ ê²Œì„ ì‹¤í–‰í•  ìˆ˜ ìˆë„ë¡
 		if (!bIsOnGame && Message == "/start" && GetWorld()->GetFirstPlayerController() == SenderPlayerController)
 		{
 			StartGame();
 			return;
 		}
 
-		// °ÔÀÓÀÌ ½ÃÀÛµÇÁö ¾Ê¾ÒÀ¸¸é ÀÔ·Â ¹«½Ã
+		// ê²Œì„ì´ ì‹œì‘ë˜ì§€ ì•Šì•˜ìœ¼ë©´ ì…ë ¥ ë¬´ì‹œ
 		if (!bIsOnGame)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Game didn't start"));
 			return;
 		}
 
-		// ÇöÀç ÀÚ½ÅÀÇ ÅÏÀÎÁö È®ÀÎÇÏ°í ¾Æ´Ï¸é ¹«½Ã	
+		// í˜„ì¬ ìì‹ ì˜ í„´ì¸ì§€ í™•ì¸í•˜ê³  ì•„ë‹ˆë©´ ë¬´ì‹œ	
 		if (ChatGameState->PlayerArray[ChatGameState->CurrentTurnPlayerIndex] != SenderPlayerController->GetPlayerState<AChatPlayerState>())
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Not your Turn"));
 			return;
 		}
 
-		// ÇÃ·¹ÀÌ¾î°¡ ÀÔ·ÂÇÑ ¿¹Ãø broadcast
+		// í”Œë ˆì´ì–´ê°€ ì…ë ¥í•œ ì˜ˆì¸¡ broadcast
 		BroadcastChatToClients(Message, SenderName);
 
-		// Á¤´ä ºñ±³
+		// ì •ë‹µ ë¹„êµ
 		UBnCBPFuncLibrary::EvaluateBullsAndCows(Message, ChatGameState->Answer, ChatGameState->Bulls, ChatGameState->Cows, ChatGameState->Out);
 		FString Msg = "";
 
@@ -197,13 +197,13 @@ void AChatGameMode::ParseChat(APlayerController* SenderPlayerController, const F
 			Msg = FString::Printf(TEXT("%d Bulls, %d Cows"), ChatGameState->Bulls, ChatGameState->Cows);
 		}
 
-		// ½Ãµµ È½¼ö Â÷°¨
+		// ì‹œë„ íšŸìˆ˜ ì°¨ê°
 		DecreaseAttemptCount(SenderPlayerController);
 
-		// ºñ±³ °á°ú broadcast
+		// ë¹„êµ ê²°ê³¼ broadcast
 		BroadcastChatToClients(Msg, "");
 
-		// ÅÏ º¯°æ
+		// í„´ ë³€ê²½
 		if (IsGameOver(SenderName))
 		{
 			EndGame();
@@ -243,8 +243,8 @@ bool AChatGameMode::IsDraw()
 		return false;
 	}
 
-	// PlayerArray´Â AGameStateBase¿¡ ±âº»ÀûÀ¸·Î µé¾îÀÖ´Â ¹è¿­,
-	// ÇöÀç °ÔÀÓ¿¡ Âü°¡ ÁßÀÎ ¸ğµç ÇÃ·¹ÀÌ¾îµéÀÇ APlayerStateµéÀ» ¸ğ¾Æ³õÀº ¹è¿­
+	// PlayerArrayëŠ” AGameStateBaseì— ê¸°ë³¸ì ìœ¼ë¡œ ë“¤ì–´ìˆëŠ” ë°°ì—´,
+	// í˜„ì¬ ê²Œì„ì— ì°¸ê°€ ì¤‘ì¸ ëª¨ë“  í”Œë ˆì´ì–´ë“¤ì˜ APlayerStateë“¤ì„ ëª¨ì•„ë†“ì€ ë°°ì—´
 	for (APlayerState* PlayerState : ChatGameState->PlayerArray)
 	{
 		AChatPlayerState* ChatPlayerState = Cast<AChatPlayerState>(PlayerState);
@@ -253,7 +253,7 @@ bool AChatGameMode::IsDraw()
 			return false;
 		}
 	}
-	
+
 	return true;
 }
 

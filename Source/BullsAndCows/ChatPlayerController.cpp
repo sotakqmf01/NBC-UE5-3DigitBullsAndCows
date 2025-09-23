@@ -34,7 +34,7 @@ void AChatPlayerController::SetupHUD()
 		UE_LOG(LogTemp, Warning, TEXT("Current is Listen Server"));
 	}
 
-	// ¼­¹ö¿¡´Â UI°¡ ¾øÀ½ => ¼­¹ö¿¡¼­ UI Ãß°¡ÇÏ¸é ¿¡·¯ ¹ß»ı => ¼­¹ö¿¡¼­ÀÇ SetupHUD´Â ¹«½Ã
+	// ì„œë²„ì—ëŠ” UIê°€ ì—†ìŒ => ì„œë²„ì—ì„œ UI ì¶”ê°€í•˜ë©´ ì—ëŸ¬ ë°œìƒ => ì„œë²„ì—ì„œì˜ SetupHUDëŠ” ë¬´ì‹œ
 	if (!IsLocalController())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Skip Server"));
@@ -58,8 +58,8 @@ void AChatPlayerController::SetupHUD()
 			ChatInputBox = Cast<UEditableTextBox>(ChatUIInstance->GetWidgetFromName("ChatInputBox"));
 			ChatLog = Cast<UScrollBox>(ChatUIInstance->GetWidgetFromName("ChatLog"));
 
-			// ¼­¹ö´Â ¸®ÇÃ¸®ÄÉÀÌ¼ÇÀ» ÇÒ ÇÊ¿ä°¡ ¾øÀ¸´Ï, OnRep_PlayerState() È£Ãâ ¾ÈµÊ
-			// => Á÷Á¢ ÀÔ·ÂÃ¢ UI ¾÷µ¥ÀÌÆ®
+			// ì„œë²„ëŠ” ë¦¬í”Œë¦¬ì¼€ì´ì…˜ì„ í•  í•„ìš”ê°€ ì—†ìœ¼ë‹ˆ, OnRep_PlayerState() í˜¸ì¶œ ì•ˆë¨
+			// => ì§ì ‘ ì…ë ¥ì°½ UI ì—…ë°ì´íŠ¸
 			AChatPlayerState* ChatPlayerState = GetPlayerState<AChatPlayerState>();
 			if (ChatPlayerState)
 			{
@@ -87,7 +87,7 @@ void AChatPlayerController::PlayerLogin()
 	}
 }
 
-// Å¬¶óÀÌ¾ğÆ® ÀÔ·ÂÃ¢ UI ¾÷µ¥ÀÌÆ®
+// í´ë¼ì´ì–¸íŠ¸ ì…ë ¥ì°½ UI ì—…ë°ì´íŠ¸
 void AChatPlayerController::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
@@ -111,14 +111,14 @@ void AChatPlayerController::SendChat(const FString& Message)
 	if (!Message.IsEmpty())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Send Message To Server"));
-		
+
 		AChatPlayerState* ChatPlayerState = GetPlayerState<AChatPlayerState>();
 		if (ChatPlayerState)
 		{
 			Server_SendChatToServer(Message, ChatPlayerState->PlayerName);
 		}
 
-		// Ã¤ÆÃ º¸³»°í ³ª¸é ÀÔ·ÂÃ¢ ºñ¿ì±â
+		// ì±„íŒ… ë³´ë‚´ê³  ë‚˜ë©´ ì…ë ¥ì°½ ë¹„ìš°ê¸°
 		if (ChatInputBox)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("ChatInputBox OK"));
@@ -199,9 +199,9 @@ void AChatPlayerController::Client_ReceiveChatFromServer_Implementation(const FS
 					NewChatEntry->SetText(FText::FromString("[" + Message + "]"));
 				}
 
-				// Ã¤ÆÃÀ» Ã¤ÆÃ Ã¢¿¡ Ãß°¡, ¹Ø¿¡ Ãß°¡µÊ(ÀÏ¹İÀûÀÎ Ã¤ÆÃÃ¢ »ı°¢ÇÏ¸é µÊ)
+				// ì±„íŒ…ì„ ì±„íŒ… ì°½ì— ì¶”ê°€, ë°‘ì— ì¶”ê°€ë¨(ì¼ë°˜ì ì¸ ì±„íŒ…ì°½ ìƒê°í•˜ë©´ ë¨)
 				ChatLog->AddChild(NewChatEntry);
-				// ±âº»ÀûÀ¸·Î ½ºÅ©·ÑÀÌ À§¿¡ °¡ ÀÖ±â ¶§¹®¿¡ ¹Ø¿¡ ÀÖµµ·Ï
+				// ê¸°ë³¸ì ìœ¼ë¡œ ìŠ¤í¬ë¡¤ì´ ìœ„ì— ê°€ ìˆê¸° ë•Œë¬¸ì— ë°‘ì— ìˆë„ë¡
 				ChatLog->ScrollToEnd();
 			}
 		}

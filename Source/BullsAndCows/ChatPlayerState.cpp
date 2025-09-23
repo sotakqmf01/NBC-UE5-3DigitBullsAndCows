@@ -20,8 +20,8 @@ void AChatPlayerState::SetAttemptCount(int32 NewAttemptCount)
 void AChatPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	
-	// AChatPlayerState Å¬·¡½ºÀÇ PlayerName°ú AttemptCount¸¦ ¸®ÇÃ¸®ÄÉÀÌ¼Ç ÇÒ ¼ö ÀÖµµ·Ï
+
+	// AChatPlayerState í´ë˜ìŠ¤ì˜ PlayerNameê³¼ AttemptCountë¥¼ ë¦¬í”Œë¦¬ì¼€ì´ì…˜ í•  ìˆ˜ ìˆë„ë¡
 	DOREPLIFETIME(AChatPlayerState, PlayerName);
 	DOREPLIFETIME(AChatPlayerState, AttemptCount);
 }

@@ -8,12 +8,12 @@ UCLASS()
 class BULLSANDCOWS_API AChatGameMode : public AGameMode
 {
 	GENERATED_BODY()
-	
+
 public:
 	AChatGameMode();
 
 	virtual void BeginPlay() override;
-	// Å¬¶óÀÌ¾ğÆ®°¡ ¼­¹ö¿¡ ·Î±×ÀÎÇÏ°í ³ª¸é È£ÃâµÊ => ÇöÀç ÇÃ·¹ÀÌ¾î ¼ö ´Ã¸®±â ÁÁÀ½
+	// í´ë¼ì´ì–¸íŠ¸ê°€ ì„œë²„ì— ë¡œê·¸ì¸í•˜ê³  ë‚˜ë©´ í˜¸ì¶œë¨ => í˜„ì¬ í”Œë ˆì´ì–´ ìˆ˜ ëŠ˜ë¦¬ê¸° ì¢‹ìŒ
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 
 	void StartGame();
@@ -26,7 +26,7 @@ public:
 	bool IsGameOver(const FName& SenderName);
 	bool IsDraw();
 	void BroadcastChatToClients(const FString& Message, const FName& SenderName);
-	
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode")
 	int32 PlayerAttemptCount;
